@@ -1,0 +1,63 @@
+.data
+	prompt1: .asciiz "Enter first number: "
+	prompt2: .asciiz "Enter second number: "
+	print_equal: .asciiz "Both input are equal!"
+	print_less: .asciiz "Input 1 < Input 2"
+	print_greater: .asciiz "Input 1> Input 2"
+	prompt3: .asciiz "\nTry again. [0-No | 1-Yes]"
+.globl main
+.text
+main:
+	li, $v0, 4
+	la, $a0, prompt1
+	syscall
+	
+	li $v0, 5
+	syscall
+	move $t0, $v0
+	
+	li, $v0, 4
+	la $a0, prompt2
+	syscall
+	
+	li $v0, 5
+	syscall
+	move $t1, $v0
+	
+	beq $t0, $t1, equal
+	bgt $t0, $t1, greater
+	blt $t0, $t1, less
+	
+retry:
+	li, $v0, 4
+	la, $a0, prompt3
+	syscall
+	
+	li, $v0,5
+	syscall
+	
+	move $t1, $v0
+	beq $zero, $t1, exit
+	bne $zero, $t1, main
+	
+equal:
+	li $v0, 4
+	la $a0, print_equal
+	syscall
+	j retry
+	
+greater:
+	li $v0, 4
+	la $a0, print_greater
+	syscall
+	j retry
+
+less:
+	li $v0, 4
+	la $a0, print_less
+	syscall
+	j retry
+	
+exit:
+	li $v0, 10
+	syscall

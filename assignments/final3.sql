@@ -1,0 +1,10 @@
+-- select * from mydb.customer;
+-- select * from mydb.customer_refund;
+-- select * from mydb.customer_rental_history;
+-- select * from mydb.insurance;
+-- select * from mydb.late_fees;
+-- select * from mydb.payment;
+-- select * from mydb.rental;
+-- select * from mydb.rental_status;
+-- select * from mydb.reservation;
+-- select * from mydb.vehicle;
