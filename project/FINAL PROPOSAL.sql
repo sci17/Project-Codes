@@ -1,0 +1,1 @@
+SELECT * FROM mydb.vehicle_damage_reports;

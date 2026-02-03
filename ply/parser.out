@@ -1,0 +1,252 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> calc
+Rule 1     calc -> expression
+Rule 2     calc -> term
+Rule 3     expression -> expression OR term
+Rule 4     expression -> term
+Rule 5     term -> term AND factor
+Rule 6     term -> factor
+Rule 7     factor -> NOT factor
+Rule 8     factor -> primary
+Rule 9     primary -> LPAREN expression RPAREN
+Rule 10    primary -> VAR
+
+Terminals, with rules where they appear
+
+AND                  : 5
+LPAREN               : 9
+NOT                  : 7
+OR                   : 3
+RPAREN               : 9
+VAR                  : 10
+error                : 
+
+Nonterminals, with rules where they appear
+
+calc                 : 0
+expression           : 1 3 9
+factor               : 5 6 7
+primary              : 8
+term                 : 2 3 4 5
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . calc
+    (1) calc -> . expression
+    (2) calc -> . term
+    (3) expression -> . expression OR term
+    (4) expression -> . term
+    (5) term -> . term AND factor
+    (6) term -> . factor
+    (7) factor -> . NOT factor
+    (8) factor -> . primary
+    (9) primary -> . LPAREN expression RPAREN
+    (10) primary -> . VAR
+
+    NOT             shift and go to state 5
+    LPAREN          shift and go to state 7
+    VAR             shift and go to state 8
+
+    calc                           shift and go to state 1
+    expression                     shift and go to state 2
+    term                           shift and go to state 3
+    factor                         shift and go to state 4
+    primary                        shift and go to state 6
+
+state 1
+
+    (0) S' -> calc .
+
+
+
+state 2
+
+    (1) calc -> expression .
+    (3) expression -> expression . OR term
+
+    $end            reduce using rule 1 (calc -> expression .)
+    OR              shift and go to state 9
+
+
+state 3
+
+    (2) calc -> term .
+    (4) expression -> term .
+    (5) term -> term . AND factor
+
+  ! reduce/reduce conflict for $end resolved using rule 2 (calc -> term .)
+    $end            reduce using rule 2 (calc -> term .)
+    OR              reduce using rule 4 (expression -> term .)
+    AND             shift and go to state 10
+
+  ! $end            [ reduce using rule 4 (expression -> term .) ]
+
+
+state 4
+
+    (6) term -> factor .
+
+    AND             reduce using rule 6 (term -> factor .)
+    $end            reduce using rule 6 (term -> factor .)
+    OR              reduce using rule 6 (term -> factor .)
+    RPAREN          reduce using rule 6 (term -> factor .)
+
+
+state 5
+
+    (7) factor -> NOT . factor
+    (7) factor -> . NOT factor
+    (8) factor -> . primary
+    (9) primary -> . LPAREN expression RPAREN
+    (10) primary -> . VAR
+
+    NOT             shift and go to state 5
+    LPAREN          shift and go to state 7
+    VAR             shift and go to state 8
+
+    factor                         shift and go to state 11
+    primary                        shift and go to state 6
+
+state 6
+
+    (8) factor -> primary .
+
+    AND             reduce using rule 8 (factor -> primary .)
+    $end            reduce using rule 8 (factor -> primary .)
+    OR              reduce using rule 8 (factor -> primary .)
+    RPAREN          reduce using rule 8 (factor -> primary .)
+
+
+state 7
+
+    (9) primary -> LPAREN . expression RPAREN
+    (3) expression -> . expression OR term
+    (4) expression -> . term
+    (5) term -> . term AND factor
+    (6) term -> . factor
+    (7) factor -> . NOT factor
+    (8) factor -> . primary
+    (9) primary -> . LPAREN expression RPAREN
+    (10) primary -> . VAR
+
+    NOT             shift and go to state 5
+    LPAREN          shift and go to state 7
+    VAR             shift and go to state 8
+
+    expression                     shift and go to state 12
+    term                           shift and go to state 13
+    factor                         shift and go to state 4
+    primary                        shift and go to state 6
+
+state 8
+
+    (10) primary -> VAR .
+
+    AND             reduce using rule 10 (primary -> VAR .)
+    $end            reduce using rule 10 (primary -> VAR .)
+    OR              reduce using rule 10 (primary -> VAR .)
+    RPAREN          reduce using rule 10 (primary -> VAR .)
+
+
+state 9
+
+    (3) expression -> expression OR . term
+    (5) term -> . term AND factor
+    (6) term -> . factor
+    (7) factor -> . NOT factor
+    (8) factor -> . primary
+    (9) primary -> . LPAREN expression RPAREN
+    (10) primary -> . VAR
+
+    NOT             shift and go to state 5
+    LPAREN          shift and go to state 7
+    VAR             shift and go to state 8
+
+    term                           shift and go to state 14
+    factor                         shift and go to state 4
+    primary                        shift and go to state 6
+
+state 10
+
+    (5) term -> term AND . factor
+    (7) factor -> . NOT factor
+    (8) factor -> . primary
+    (9) primary -> . LPAREN expression RPAREN
+    (10) primary -> . VAR
+
+    NOT             shift and go to state 5
+    LPAREN          shift and go to state 7
+    VAR             shift and go to state 8
+
+    factor                         shift and go to state 15
+    primary                        shift and go to state 6
+
+state 11
+
+    (7) factor -> NOT factor .
+
+    AND             reduce using rule 7 (factor -> NOT factor .)
+    $end            reduce using rule 7 (factor -> NOT factor .)
+    OR              reduce using rule 7 (factor -> NOT factor .)
+    RPAREN          reduce using rule 7 (factor -> NOT factor .)
+
+
+state 12
+
+    (9) primary -> LPAREN expression . RPAREN
+    (3) expression -> expression . OR term
+
+    RPAREN          shift and go to state 16
+    OR              shift and go to state 9
+
+
+state 13
+
+    (4) expression -> term .
+    (5) term -> term . AND factor
+
+    RPAREN          reduce using rule 4 (expression -> term .)
+    OR              reduce using rule 4 (expression -> term .)
+    AND             shift and go to state 10
+
+
+state 14
+
+    (3) expression -> expression OR term .
+    (5) term -> term . AND factor
+
+    OR              reduce using rule 3 (expression -> expression OR term .)
+    $end            reduce using rule 3 (expression -> expression OR term .)
+    RPAREN          reduce using rule 3 (expression -> expression OR term .)
+    AND             shift and go to state 10
+
+
+state 15
+
+    (5) term -> term AND factor .
+
+    AND             reduce using rule 5 (term -> term AND factor .)
+    $end            reduce using rule 5 (term -> term AND factor .)
+    OR              reduce using rule 5 (term -> term AND factor .)
+    RPAREN          reduce using rule 5 (term -> term AND factor .)
+
+
+state 16
+
+    (9) primary -> LPAREN expression RPAREN .
+
+    AND             reduce using rule 9 (primary -> LPAREN expression RPAREN .)
+    $end            reduce using rule 9 (primary -> LPAREN expression RPAREN .)
+    OR              reduce using rule 9 (primary -> LPAREN expression RPAREN .)
+    RPAREN          reduce using rule 9 (primary -> LPAREN expression RPAREN .)
+
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: reduce/reduce conflict in state 3 resolved using rule (calc -> term)
+WARNING: rejected rule (expression -> term) in state 3
