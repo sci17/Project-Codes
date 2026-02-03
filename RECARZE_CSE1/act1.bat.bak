@@ -1,0 +1,45 @@
+@echo off
+setlocal enabledelayedexpansion
+
+set RAR_PATH = "C:\Program Files\WinRAR\Rar.exe"
+
+set /p folderdir = "Enter the directory path of the folders you want to compress: "
+
+echo.
+echo Choose Compression Level
+echo 0 = Store
+echo 1 = Fastest
+echo 2 = Fast
+echo 3 = Normal
+echo 4 = Good
+echo 5 = Best
+set /p Compression_level = "Enter the compression level (0-5):"
+
+set /p password = "Enter a password. (You may leave it blank for no password)."
+set /p comment = "Enter a comment. (You may leave it blank for no comment)."
+set /p deleteafter = "Would you like to delete the original folders after compression?(y/n) :"
+
+for /D %%d in ("%folderdir%\*") do (
+	set foldername == %%~nxd
+	echo Compressing Folder: !foldername!
+	
+	set rarcommand = %RAR_PATH% a -r -m%Compression_level% "%%d.rar" "%%d\"
+	
+	if not !password! == "" (
+		set rarcommand = !rarcommand! -p!password!) 
+	
+	if not !comment! == "" (
+		echo !comment! > comment.txt
+		set rarcommand = !rarcommand! -z!comment.txt! ) 
+		
+	if /i "!deleteafter!" == "y" (
+		rd /s /q "%%d"
+		
+		echo Delete folder : %%d ) 
+		
+	if exist comment.txt del comment.txt 
+	) 
+	
+	echo.
+	echo All folders compressed successfully!
+	pause 
