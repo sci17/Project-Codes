@@ -1,0 +1,32 @@
+* {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    padding: 10px;
+}
+
+body {
+    background-color: #f8f9fa;
+}
+
+.quiz-container {
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+    background-color: blanchedalmond;
+    border-radius: 10px;
+}
+
+.right-align {
+    margin-left: auto;
+    display: block;
+}
+
+.option {
+    background: whitesmoke;
+    transition: background-color 0.3s ease;
+}
+
+.option:hover {
+    background-color: #ffa5e4;
+    cursor: pointer;
+}
+
