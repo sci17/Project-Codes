@@ -1,0 +1,14 @@
+C:\Users\ACER\Desktop\bubble sort\bin\Debug\net7.0\bubble sort.exe
+C:\Users\ACER\Desktop\bubble sort\bin\Debug\net7.0\bubble sort.deps.json
+C:\Users\ACER\Desktop\bubble sort\bin\Debug\net7.0\bubble sort.runtimeconfig.json
+C:\Users\ACER\Desktop\bubble sort\bin\Debug\net7.0\bubble sort.dll
+C:\Users\ACER\Desktop\bubble sort\bin\Debug\net7.0\bubble sort.pdb
+C:\Users\ACER\Desktop\bubble sort\obj\Debug\net7.0\bubble sort.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ACER\Desktop\bubble sort\obj\Debug\net7.0\bubble sort.AssemblyInfoInputs.cache
+C:\Users\ACER\Desktop\bubble sort\obj\Debug\net7.0\bubble sort.AssemblyInfo.cs
+C:\Users\ACER\Desktop\bubble sort\obj\Debug\net7.0\bubble sort.csproj.CoreCompileInputs.cache
+C:\Users\ACER\Desktop\bubble sort\obj\Debug\net7.0\bubble sort.dll
+C:\Users\ACER\Desktop\bubble sort\obj\Debug\net7.0\refint\bubble sort.dll
+C:\Users\ACER\Desktop\bubble sort\obj\Debug\net7.0\bubble sort.pdb
+C:\Users\ACER\Desktop\bubble sort\obj\Debug\net7.0\bubble sort.genruntimeconfig.cache
+C:\Users\ACER\Desktop\bubble sort\obj\Debug\net7.0\ref\bubble sort.dll
