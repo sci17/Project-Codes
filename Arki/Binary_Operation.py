@@ -1,3 +1,4 @@
+  
 class binary_operation:
     def __init__(self, value_1, value_2):
         self.value_1 = str(value_1)

@@ -1,0 +1,129 @@
+.data
+
+operation: .asciiz "Choose an operation : +, -, *, /. Press 'f' for fraction."
+value1: .asciiz "Enter your first number:"
+value2: .asciiz "Enter your second number:"
+result: .asciiz "The result is:"
+inv_input: .asciiz "The input is divisible by zero"
+newline: .asciiz "\n"
+
+.text
+.globl main
+
+main:
+	li $t0, 1
+	
+prog_loop:
+	li $v0, 4
+	la $a0, operation
+	syscall
+	
+	li $v0, 12
+	syscall
+	move $t1, $v0
+	
+	li $v0, 4
+	la $a0, newline
+	syscall
+	
+	li $v0, 4
+	la $a0, value1
+	syscall
+	
+	li $v0, 5
+	syscall
+	move $t3, $v0
+	
+	li $v0, 4
+	la $a0, newline
+	syscall
+	
+	li $v0, 4
+	la $a0, value2
+	syscall
+	
+	li $v0, 5
+	syscall
+	move $t4, $v0
+	
+	li $v0, 4
+	la $a0,newline
+	syscall
+	
+	beq $t1, 43, add_number
+	beq $t1, 45, sub_number
+	beq $t1, 42, mult_number
+	beq $t1, 47, div_number
+	beq, $t1, 103, solve_fraction
+	
+add_number:
+	add $t5, $t3, $t4
+	
+	li $v0, 4
+	la $a0, result
+	syscall
+	move $a0, $t5
+	li $v0, 1
+	syscall
+	
+	
+	li $v0, 4
+	la $a0, newline
+	syscall
+	
+	j prog_loop
+
+sub_number:
+	sub $t5, $t3, $t4
+	
+	li $v0, 4
+	la $a0, result
+	syscall
+	move $a0, $t5
+	li $v0, 1
+	syscall
+	
+	
+	li $v0, 4
+	la $a0, newline
+	syscall
+	
+	j prog_loop
+
+mult_number:
+	mul $t5, $t3, $t4
+	
+	li $v0, 4
+	la $a0, result
+	syscall
+	move $a0, $t5
+	li $v0, 1
+	syscall
+	
+	
+	li $v0, 4
+	la $a0, newline
+	syscall
+
+	j prog_loop
+
+div_number:
+	div $t5, $t3, $t4
+	
+	li $v0, 4
+	la $a0, result
+	syscall
+	move $a0, $t5
+	li $v0, 1
+	syscall
+	
+	
+	li $v0, 4
+	la $a0, newline
+	syscall
+	
+	j prog_loop
+	
+exit_prog:
+	li $v0, 10
+	syscall

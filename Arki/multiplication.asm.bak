@@ -1,0 +1,53 @@
+.data
+prompt:         .asciiz "Enter a number: "
+newline:        .asciiz "\n"
+
+.text
+.globl main
+
+main:
+    # Prompt user to enter a number
+    li $v0, 4                   # syscall code for printing string
+    la $a0, prompt              # load address of prompt into $a0
+    syscall                     # print prompt
+
+    # Read user input
+    li $v0, 5                   # syscall code for reading integer
+    syscall                     # read integer
+    move $s0, $v0               # store user input in $s0
+    
+    # Print the multiplication table
+    li $t0, 1                   # initialize outer loop counter to 1
+
+print_table_row_loop:
+    # Print current row
+    li $t1, 1                   # initialize inner loop counter to 1
+
+print_table_column_loop:
+    # Calculate and print multiplication result
+    mul $a0, $t0, $t1           # multiply outer loop counter by inner loop counter
+    li $v0, 1                   # syscall code for printing integer
+    syscall                     # print multiplication result
+
+    # Print space for formatting
+    li $v0, 4                   # syscall code for printing string
+    la $a0, space               # load address of space into $a0
+    syscall                     # print space
+
+    # Increment inner loop counter
+    addi $t1, $t1, 1            # increment inner loop counter
+    blt $t1, $s0, print_table_column_loop  # check inner loop condition
+
+    # Print newline
+    li $v0, 4                   # syscall code for printing string
+    la $a0, newline             # load address of newline into $a0
+    syscall                     # print newline
+
+    # Increment outer loop counter
+    addi $t0, $t0, 1            # increment outer loop counter
+    blt $t0, $s0, print_table_row_loop  # check outer loop condition
+
+    # Exit program
+    li $v0, 10                  # syscall code for exit
+    syscall                     # exit program
+

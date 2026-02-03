@@ -1,0 +1,123 @@
+.data 
+operation: .asciiz "Enter the operation  +, -, *, /. Press q if you want to quit the operation:"
+value1: .asciiz "Enter your first number:"
+value2: .asciiz "Enter your second number:"
+result: .asciiz "Result:"
+invalid_input: .asciiz "Invalid Input! Try Again."
+newline: .asciiz "\n"
+
+.text
+.globl main
+
+main:
+	li $t0, 1
+
+program_loop:
+li $v0, 4
+la $a0, operation
+syscall
+
+li $v0, 12
+syscall
+move $t4, $v0
+
+li $v0, 4
+la $a0, newline
+syscall
+
+li $t5, 113
+beq $t4, $t5, exit
+
+li $v0, 4
+la $a0, value1
+syscall
+
+li $v0, 5
+syscall
+move $t6, $v0
+
+li $v0, 4
+la $a0, newline
+syscall
+
+li $v0, 4
+la $a0, value2
+syscall
+
+li $v0, 5
+syscall
+move $t7, $v0
+
+beq $t4, 43, add_numbers
+beq $t4, 45, sub_numbers
+beq $t4, 42, mult_numbers
+beq $t4, 47, div_numbers 
+
+li $v0, 4
+la $a0, invalid_input
+syscall
+j program_loop
+
+add_numbers:
+add $t8, $t6, $t7
+
+li $v0, 4
+la $a0, result
+syscall
+move $a0, $t8
+li $v0, 1
+syscall
+
+li $v0, 4
+la $a0, newline
+syscall
+j program_loop
+
+sub_numbers:
+sub $t8, $t6, $t7
+
+li $v0, 4
+la $a0, result
+syscall
+move $a0, $t8
+li $v0, 1
+syscall
+
+li $v0, 4
+la $a0, newline
+syscall
+j program_loop
+
+mult_numbers:
+mul $t8, $t6, $t7
+
+li $v0, 4
+la $a0, result
+syscall
+move $a0, $t8
+li $v0, 1
+syscall
+
+li $v0, 4
+la $a0, newline
+syscall
+j program_loop
+
+div_numbers:
+div $t8, $t6, $t7
+
+li $v0, 4
+la $a0, result
+syscall
+move $a0, $t8
+li $v0, 1
+syscall
+
+li $v0,4
+la $a0, newline
+syscall
+j program_loop
+
+exit:
+li $v0, 10
+syscall

@@ -1,0 +1,72 @@
+.data
+	input1: .asciiz "Input 1:"
+	input2: .asciiz "Input 2:\n"
+	output_gcf: .asciiz "Greatest Common Factor:"
+	ouput_lcm: .asciiz "Least Common Multiple:"
+	nl: .asciiz "\n"
+.text
+.globl main
+
+gcf:
+
+	
+	gcf_loop:
+		beq, $a1, $zero, gcf_exit
+		div $a0, $a1
+		mfhi $t0
+		move $a0, $a1
+		move $a1, $t0
+		j gcf_loop
+gcf_exit:
+	move $v0, $a0
+	jr $ra
+	
+lcm:
+	
+	mult $a0, $a1
+	mflo $t0
+	move $a0,$t0
+	jal gcd 
+	div $t0, $v0
+	mflo $v0
+	jr $ra
+	
+
+main:
+	li, $v0, 4
+	la, $a0, input1
+	syscall
+	
+	li $v0, 5
+	syscall
+	move $s0, $v0
+	
+	li $v0, 4
+	la, $a0, input2
+	syscall
+	
+	li $v0, 5
+	syscall
+	move $s1, $v0
+	
+	
+	move $a0, $s0
+	move $a1, $s1
+	jal gcf
+	move $a0, $v0
+	li $v0, 1
+	syscall
+	
+	move $a0, $s0
+    move $a1, $s1
+    jal lcm
+    move $a0, $v0
+    li $v0, 1
+    syscall
+    li $v0, 4
+    la $a0, nl
+    syscall
+		
+	li $v0, 10
+	syscall
+	

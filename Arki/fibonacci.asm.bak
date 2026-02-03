@@ -1,0 +1,58 @@
+.data 
+newline: .asciiz "\n"
+input: .asciiz "Enter input for Fibonnaci:"
+result: .asciiz "Fibonnaci Sequence:"
+
+.text
+.globl main
+
+main:
+li $v0, 4
+la $a0, input
+syscall
+
+li $v0, 1
+syscall
+move $t0, $v0
+
+li $t1, 0
+li $t2, 1
+
+li $v0, 4
+la $a0, result
+syscall
+
+li $t1, 1
+syscall
+move $a0, $t1
+li $v0, 4
+la $a0, newline
+syscall
+
+li $t2, 1
+syscall
+move $a0, $t2
+li $v0, 4
+la $a0, newline
+syscall
+
+addi $t0, $t0, -2
+
+loop:
+add $t3, $t1, $t2
+li $v0, 1
+move $a0, $t3
+syscall
+
+li $v0, 4
+la $a0, newline
+syscall
+
+move $t1, $t2
+move $t2, $t3
+
+addi $t0, $t0, -1
+bnez $t0, loop
+
+li $v0, 10
+syscall
